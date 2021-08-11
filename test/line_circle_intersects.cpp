@@ -102,13 +102,3 @@ vector<Point2> intersects(Point2 p1, Point2 p2, Point2 cp, double r) {
  
     return result;
 }
-
-int main(void) {
-  // test 
-  Point2 cp = Point2(0, 0);
-  double r = 1.0;
-  vector<Point2> result = intersects(Point2(0, 0), Point2(2, 0), cp, r);
-  for (int i = 0; i < result.size(); i++) {
-    cout << " Point : ( " << result[i].x << " ," << result[i].y << " )" << endl;
-  }
-}

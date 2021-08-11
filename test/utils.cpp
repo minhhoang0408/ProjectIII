@@ -60,9 +60,9 @@ Point3 change_of_basis(Point3 p1, Point3 p2)
   """
   */
   Point3 p;
-  double theta1 = deg2rad(p.y);
+  double theta1 = deg2rad(p1.theta);
   double dx = p2.x - p1.x;
-  double dy = p2.y - p2.y;
+  double dy = p2.y - p1.y;
   p.x = dx * cos(theta1) + dy * sin(theta1);
   p.y = -dx * sin(theta1) + dy * cos(theta1);
   p.theta = p2.theta - p1.theta;

@@ -27,10 +27,10 @@ enum Gear
 
 class PathElement
 {
-  constexpr static const float RATIO = 6.8;
 
 private:
 public:
+  static float RATIO;
   int steering;
   int gear;
   float param;
@@ -95,6 +95,8 @@ public:
     }
   }
 };
+
+float PathElement::RATIO = 6.8f;
 
 // long path_length(double path)
 
@@ -553,7 +555,7 @@ double path_length(vector<PathElement> path)
   return sum;
 }
 
-vector<vector<PathElement>> get_all_paths(Point3 start, Point3 end, vector<vector<double>> edges)
+vector<vector<PathElement>> get_all_paths(Point3 start, Point3 end, vector<vector<double>> edges = {})
 {
   /*
   """
@@ -562,7 +564,9 @@ vector<vector<PathElement>> get_all_paths(Point3 start, Point3 end, vector<vecto
   """
   */
 
-  vector<function<vector<PathElement>(double, double, double)>> path_fns{path1, path2, path3, path4, path5, path6, path7, path8, path9, path10, path11, path12};
+  vector<function<vector<PathElement>(double, double, double)>> path_fns{path1, path2, path3, path4, 
+                                                                         path5, path6, path7, path8, 
+                                                                         path9, path10, path11, path12};
   vector<vector<PathElement>> paths;
 
   // get coordinates of end in the set of axis where start is (0,0,0)
@@ -610,7 +614,7 @@ vector<vector<PathElement>> get_all_paths(Point3 start, Point3 end, vector<vecto
   return paths;
 }
 
-vector<PathElement> get_optimal_path(Point3 start, Point3 end, vector<vector<double>> polygons)
+vector<PathElement> get_optimal_path(Point3 start, Point3 end, vector<vector<double>> polygons = {})
 {
   /*
     """

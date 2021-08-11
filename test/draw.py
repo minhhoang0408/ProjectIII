@@ -80,7 +80,7 @@ def draw_path(bob, path):
         trajectory.append((bob.position()[0]/SCALE, bob.position()[1]/SCALE, gear * e.param, typeOfTraj, typeOfSteering))
         typeOfTraj = "C"
 
-    #print(trajectory)
+    # print(trajectory)
     return trajectory
 
 def set_random_pencolor(bob):
