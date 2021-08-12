@@ -76,7 +76,7 @@ def draw_path(bob, path):
             typeOfTraj = "F"
             typeOfSteering = "S"
         
-        #print(bob.position())
+        # print("PATH START ==> x: {}, y: {}".format(bob.position()[0]/SCALE, bob.position()[1]/SCALE))
         trajectory.append((bob.position()[0]/SCALE, bob.position()[1]/SCALE, gear * e.param, typeOfTraj, typeOfSteering))
         typeOfTraj = "C"
 

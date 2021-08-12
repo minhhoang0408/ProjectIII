@@ -33,8 +33,8 @@ public:
   static float RATIO;
   int steering;
   int gear;
-  float param;
-  PathElement(float _param, int _steering, int _gear)
+  double param;
+  PathElement(double _param, int _steering, int _gear)
   {
     this->steering = _steering;
     this->param = _param;
@@ -98,8 +98,6 @@ public:
 
 float PathElement::RATIO = 6.8f;
 
-// long path_length(double path)
-
 vector<PathElement> path1(double x, double y, double phi)
 {
 
@@ -150,7 +148,7 @@ vector<PathElement> path2(double x, double y, double phi)
     {
       path.push_back(PathElement(t, Steering::LEFT, Gear::FORWARD));
       path.push_back(PathElement(u, Steering::STRAIGHT, Gear::FORWARD));
-      path.push_back(PathElement(v, Steering::LEFT, Gear::FORWARD));
+      path.push_back(PathElement(v, Steering::RIGHT, Gear::FORWARD));
     }
   }
 
@@ -166,7 +164,7 @@ vector<PathElement> path3(double x, double y, double phi)
   */
 
   PolarCodinate polar1 = R(x, y);
-  phi = M(deg2rad(phi));
+  phi = deg2rad(phi);
   vector<PathElement> path;
 
   double xi = x - sin(phi);
@@ -218,7 +216,7 @@ vector<PathElement> path4(double x, double y, double phi)
     {
       path.push_back(PathElement(t, Steering::LEFT, Gear::FORWARD));
       path.push_back(PathElement(u, Steering::RIGHT, Gear::BACKWARD));
-      path.push_back(PathElement(v, Steering::LEFT, Gear::FORWARD));
+      path.push_back(PathElement(v, Steering::LEFT, Gear::BACKWARD));
     }
   }
 
@@ -428,7 +426,7 @@ vector<PathElement> path10(double x, double y, double phi)
   {
     double t = M(rt.theta + M_PI / 2);
     double u = rt.r - 2;
-    double v = M(M_PI - t - M_PI / 2);
+    double v = M(phi - t - M_PI / 2);
 
     if (t >= 0 && u >= 0 && v >= 0)
     {
@@ -457,10 +455,11 @@ vector<PathElement> path11(double x, double y, double phi)
   double xi = x + sin(phi);
   double eta = y - 1 - cos(phi);
   PolarCodinate rt = R(xi, eta);
+  // cout << "PATH 11 - r: " << rt.r << " theta: " << rt.theta << endl;
 
   if (rt.r >= 2)
   {
-    double t = M(rt.theta);
+    float t = M(rt.theta);
     double u = rt.r - 2;
     double v = M(phi - t - M_PI / 2);
 
@@ -564,8 +563,8 @@ vector<vector<PathElement>> get_all_paths(Point3 start, Point3 end, vector<vecto
   """
   */
 
-  vector<function<vector<PathElement>(double, double, double)>> path_fns{path1, path2, path3, path4, 
-                                                                         path5, path6, path7, path8, 
+  vector<function<vector<PathElement>(double, double, double)>> path_fns{path1, path2, path3, path4,
+                                                                         path5, path6, path7, path8,
                                                                          path9, path10, path11, path12};
   vector<vector<PathElement>> paths;
 
@@ -575,7 +574,7 @@ vector<vector<PathElement>> get_all_paths(Point3 start, Point3 end, vector<vecto
   double y = xyt.y;
   double theta = xyt.theta;
 
-  for (int i = 0; i <= path_fns.size() - 1; i++)
+  for (int i = 0; i < path_fns.size(); i++)
   {
     // get the four variants for each path type, cf article
     paths.push_back(path_fns[i](x, y, theta));
@@ -585,6 +584,8 @@ vector<vector<PathElement>> get_all_paths(Point3 start, Point3 end, vector<vecto
   }
 
   // remove path elements that have parameter 0
+
+  //
   for (vector<PathElement> &path : paths)
   {
     path.erase(
@@ -611,6 +612,7 @@ vector<vector<PathElement>> get_all_paths(Point3 start, Point3 end, vector<vecto
   //   // #paths = list(filter(lambda e: cutThroughCurver(start, end, e, edges) == 0, paths))
   // }
 
+
   return paths;
 }
 
@@ -627,7 +629,7 @@ vector<PathElement> get_optimal_path(Point3 start, Point3 end, vector<vector<dou
   int i_min = 0;
   double L_min = path_length(paths[0]);
 
-  for (int i = 1; i < paths.size(); i++)
+  for (int i = 1; i < paths.size() - 1; i++)
   {
     double L = path_length(paths[i]);
     if (L <= L_min)

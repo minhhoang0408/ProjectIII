@@ -8,7 +8,12 @@ ROUTE = [(-2,4,180), (2,4,0), (2,-3,90), (-5,-6,240), (-6, -7, 160), (-7,-1,80)]
 full_path = []
 total_length = 0
 
-for i in range(1):
+for i in range(len(ROUTE) - 1):
+    # x, y, theta = rs.change_of_basis(ROUTE[i], ROUTE[i+1])
+    
+    # result = rs.path11(-x, y, -theta)
+    # print("Size: ", len(result))
+    print(rs.change_of_basis(ROUTE[i], ROUTE[i+1]))
     path = rs.get_optimal_path(ROUTE[i], ROUTE[i+1])
     full_path += path
     total_length += rs.path_length(path)

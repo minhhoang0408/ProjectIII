@@ -49,10 +49,12 @@ int main()
   vector<PathElement> full_path;
   double total_length = 0;
 
-  for (int i = 0; i < 1; i++)
+  for (int i = 0; i < ROUTE.size() - 1; i++)
   {
-    Point3 x = change_of_basis(ROUTE[i], ROUTE[i+1]);
-    cout << "Change of basic: " << x.x << " - " << x.y << " - " << x.theta << endl; 
+    // Point3 x = change_of_basis(ROUTE[i], ROUTE[i+1]);
+    // cout << "Change of basic: " << x.x << " - " << x.y << " - " << x.theta << endl; 
+    // vector<PathElement> result = path11(-x.x, x.y, -x.theta);
+    // cout << result.size() << endl;
     vector<PathElement> path = get_optimal_path(ROUTE[i], ROUTE[i + 1]);
 
     for (int j = 0; j < path.size(); j++)
@@ -63,12 +65,13 @@ int main()
     total_length += path_length(path);
   }
 
-  full_path = timeflip(full_path);
+  // full_path = timeflip(full_path);
 
   cout << "Shortest path length: " << total_length << endl;
 
   for (int i = 0; i < full_path.size(); i++)
   {
-    cout << "{ Steering: " << getNameSteering(full_path[i].steering) << "\t Gear: " << getNameGear(full_path[i].gear) << "\t distance: " << full_path[i].param << endl;
+    // cout << "{ Steering: " << full_path[i].steering << "\t Gear: " << full_path[i].gear << "\t distance: " << full_path[i].param << endl;
+    cout << full_path[i].repr() << endl;
   }
 }

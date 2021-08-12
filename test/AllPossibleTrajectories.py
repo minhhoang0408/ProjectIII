@@ -40,9 +40,8 @@ def main():
         dy = pts[i+1][1] - pts[i][1]
         theta = math.atan2(dy, dx)
         PATH.append((pts[i][0], pts[i][1], utils.rad2deg(theta)))
-    PATH.append((pts[-1][0], pts[-1][1], lastAngle))
+    PATH.append((pts[-1][0], pts[-1][1], lastAngle)) 
 
-    
     # init turtle
     tesla = turtle.Turtle()
     tesla.speed(0) # 0: fast; 1: slow, 8.4: cool

@@ -8,14 +8,16 @@ using namespace std;
 
 const int SCALE = 200;
 
-struct TRAJECTORY {
+struct TRAJECTORY
+{
   double x;
   double y;
   double gear;
   string typeOfTraj;
   string typeOfSteering;
 
-  TRAJECTORY(double x, double y, double gear, string typeOfTraj, string typeOfSteering) {
+  TRAJECTORY(double x, double y, double gear, string typeOfTraj, string typeOfSteering)
+  {
     this->x = x;
     this->y = y;
     this->gear = gear;
@@ -44,34 +46,41 @@ Point3 unscale_point(Point3 x)
   return Point3(x.x / SCALE, x.y / SCALE, x.theta / SCALE);
 }
 
-/*
-def vec(bob):
-  """
-  Draw an arrow.
-  """
-  bob.down()
-  bob.pensize(3)
-  bob.forward(scale(1.2))
-  bob.right(25)
-  bob.backward(scale(.4))
-  bob.forward(scale(.4))
-  bob.left(50)
-  bob.backward(scale(.4))
-  bob.forward(scale(.4))
-  bob.right(25)
-  bob.pensize(1)
-  bob.up()
+vector<TRAJECTORY> draw_path(vector<PathElement> path)
+{
+  // todo: Get Position
 
-def goto(bob, pos, scale_pos=True):
-  """
-  Go to a position without drawing.
-  """
-  bob.up()
-  if scale_pos:
-      bob.setpos(scale(pos[:2]))
-  else:
-      bob.setpos(pos[:2])
-  bob.setheading(pos[2])
-  bob.down() 
-*/
+  vector<TRAJECTORY> trajectory;
+  string typeOfTraj = "C";
+  string typeOfSteering = "S";
 
+  Point3 currentCoordinate;
+
+
+  for (int i = 0; i < path.size(); i++)
+  {
+    int gear = path[i].gear == Gear::FORWARD ? 1 : -1;
+    if (path[i].steering == Steering::LEFT)
+    {
+      // get Pos
+      typeOfSteering = "L";
+    }
+    else if (path[i].steering == Steering::RIGHT)
+    {
+      // get Pos
+      typeOfSteering = "R";
+    }
+    else if (path[i].steering == Steering::STRAIGHT)
+    {
+      // get Pos
+      typeOfTraj = "F";
+      typeOfSteering = "S";
+    }
+    
+    trajectory.push_back(TRAJECTORY(0, 0, gear * path[i].param, typeOfTraj, typeOfSteering));
+    typeOfTraj = "C";
+  }
+
+  // print
+  return trajectory;
+}

@@ -18,8 +18,8 @@ corresponding path (if it exists) as a list of PathElements (or an empty list).
 from utils import *
 import math
 from enum import Enum
-from shapely.geometry import LineString
-from shapely.geometry import Point
+# from shapely.geometry import LineString
+# from shapely.geometry import Point
 import os
 
 
@@ -122,52 +122,52 @@ def readPlots():
     f.close()
     return pts
 
-def cutThroughCurver(start, end, param, steering, edges):
-    if steering == "S":
-        return 0
-    deltaX = end[0] - start[0]
-    deltaY = end[1] - start[1]
-    distance = math.sqrt(deltaX*deltaX + deltaY*deltaY)
-    midX = (start[0] + end[0])*0.5
-    midY = (start[1] + end[1])*0.5
-    xNormal = 0
-    yNormal = 0
-    if steering == "L":
-        xNormal = -deltaY/distance
-        yNormal = -deltaX/distance
-    if steering == "R":
-        xNormal = deltaY/distance
-        yNormal = deltaX/distance
+# def cutThroughCurver(start, end, param, steering, edges):
+#     if steering == "S":
+#         return 0
+#     deltaX = end[0] - start[0]
+#     deltaY = end[1] - start[1]
+#     distance = math.sqrt(deltaX*deltaX + deltaY*deltaY)
+#     midX = (start[0] + end[0])*0.5
+#     midY = (start[1] + end[1])*0.5
+#     xNormal = 0
+#     yNormal = 0
+#     if steering == "L":
+#         xNormal = -deltaY/distance
+#         yNormal = -deltaX/distance
+#     if steering == "R":
+#         xNormal = deltaY/distance
+#         yNormal = deltaX/distance
 
-    alpha = param/2
-    Radius = 1 #0.5*distance/math.sin(alpha)
-    deltaR = math.cos(alpha)
-    xR = midX + deltaR*xNormal
-    yR = midY + deltaR*yNormal
-    p = Point(xR, yR)
-    c = p.buffer(Radius).boundary
+#     alpha = param/2
+#     Radius = 1 #0.5*distance/math.sin(alpha)
+#     deltaR = math.cos(alpha)
+#     xR = midX + deltaR*xNormal
+#     yR = midY + deltaR*yNormal
+#     p = Point(xR, yR)
+#     c = p.buffer(Radius).boundary
 
-    maxX = start[0] if start[0] > end[0] else end[0]
-    minX = start[0] if maxX == end[0] else end[0]
+#     maxX = start[0] if start[0] > end[0] else end[0]
+#     minX = start[0] if maxX == end[0] else end[0]
 
-    maxY = start[1] if start[1] > end[1] else end[1]
-    minY = start[1] if maxY == end[1] else end[1]
+#     maxY = start[1] if start[1] > end[1] else end[1]
+#     minY = start[1] if maxY == end[1] else end[1]
     
-    for e in edges:
-        l = LineString([(e[0], e[1]), (e[2], e[3])])
-        i = c.intersection(l)
-        if len(i.coords) >= 1:
-            xIntersection = i.coords[0][0]
-            yIntersection = i.coords[0][1]
-            if (xIntersection > minX and xIntersection < maxX) and (yIntersection > minY and yIntersection < maxY):
-                return 1
-            if len(i) == 2:
-                xIntersection = i.coords[1][0]
-                yIntersection = i.coords[1][0]
-                if (xIntersection > minX and xIntersection < maxX) and (yIntersection > minY and yIntersection < maxY):
-                    return 1
+#     for e in edges:
+#         l = LineString([(e[0], e[1]), (e[2], e[3])])
+#         i = c.intersection(l)
+#         if len(i.coords) >= 1:
+#             xIntersection = i.coords[0][0]
+#             yIntersection = i.coords[0][1]
+#             if (xIntersection > minX and xIntersection < maxX) and (yIntersection > minY and yIntersection < maxY):
+#                 return 1
+#             if len(i) == 2:
+#                 xIntersection = i.coords[1][0]
+#                 yIntersection = i.coords[1][0]
+#                 if (xIntersection > minX and xIntersection < maxX) and (yIntersection > minY and yIntersection < maxY):
+#                     return 1
         
-    return 0
+#     return 0
 
 def get_all_paths(start, end, edges = []):
     """
@@ -177,8 +177,6 @@ def get_all_paths(start, end, edges = []):
     path_fns = [path1, path2, path3, path4, path5, path6, \
                 path7, path8, path9, path10, path11, path12]
     paths = []
-
-    
 
     # get coordinates of end in the set of axis where start is (0,0,0)
     x, y, theta = change_of_basis(start, end)
@@ -191,6 +189,7 @@ def get_all_paths(start, end, edges = []):
         paths.append(reflect(timeflip(get_path(-x, -y, theta))))
 
     # remove path elements that have parameter 0
+    
     for i in range(len(paths)):
         paths[i] = list(filter(lambda e: e.param != 0, paths[i]))
 

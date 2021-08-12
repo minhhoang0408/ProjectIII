@@ -1,0 +1,146 @@
+#Paths 5
+_PathID 0 from 5.0 4.411764705882353 to 4.690789264705883 5.387125882352941
+__#Possible_Path_Segment 5
+___SegmentID_0_PathID_0 3
+_____Section 4.925 4.792 0.39 C L
+_____Section 4.734 5.257 0.5 F S
+_____Section 4.691 5.387 0.14 C R
+___SegmentID_1_PathID_0 3
+_____Section 6.828 4.972 2.55 C R
+_____Section 6.658 5.585 -0.65 C L
+_____Section 4.691 5.387 2.84 C R
+___SegmentID_2_PathID_0 3
+_____Section 3.014 4.243 -2.97 C L
+_____Section 2.876 4.606 -0.39 C R
+_____Section 4.691 5.387 2.83 C L
+___SegmentID_3_PathID_0 4
+_____Section 4.691 5.135 0.81 C L
+_____Section 4.83 5.024 -0.18 C R
+_____Section 4.969 4.913 -0.18 C L
+_____Section 4.691 5.387 0.56 C R
+___SegmentID_4_PathID_0 4
+_____Section 5.232 5.052 0.69 C R
+_____Section 4.861 4.775 -0.47 C L
+_____Section 4.491 4.497 -0.47 C R
+_____Section 4.691 5.387 0.95 C L
+_PathID 1 from 4.690789264705883 5.387125882352941 to 4.411764705882353 6.470588235294118
+__#Possible_Path_Segment 6
+___SegmentID_0_PathID_1 3
+_____Section 6.035 6.563 2.21 C R
+_____Section 5.412 7.48 -1.18 C L
+_____Section 4.412 6.471 1.58 C R
+___SegmentID_1_PathID_1 3
+_____Section 3.468 6.105 1.58 C L
+_____Section 3.813 6.271 -0.39 C R
+_____Section 4.412 6.471 -0.64 C L
+___SegmentID_2_PathID_1 3
+_____Section 4.321 4.337 -1.18 C L
+_____Section 4.666 4.503 0.39 C R
+_____Section 4.412 6.471 2.88 C L
+___SegmentID_3_PathID_1 3
+_____Section 4.659 5.627 0.24 C R
+_____Section 4.036 6.544 1.18 C L
+_____Section 4.412 6.471 -0.39 C R
+___SegmentID_4_PathID_1 4
+_____Section 4.928 4.954 -0.5 C R
+_____Section 5.188 4.404 -0.62 C L
+_____Section 5.296 5.003 0.62 C R
+_____Section 4.412 6.471 2.06 C L
+___SegmentID_5_PathID_1 4
+_____Section 3.609 6.131 1.43 C L
+_____Section 4.067 6.304 -0.49 C R
+_____Section 4.525 6.477 -0.49 C L
+_____Section 4.412 6.471 0.11 C R
+_PathID 2 from 4.411764705882353 6.470588235294118 to 0.0 6.470588235294118
+__#Possible_Path_Segment 6
+___SegmentID_0_PathID_2 3
+_____Section 4.373 6.471 0.04 C R
+_____Section 0.565 6.619 3.81 F S
+_____Section -0.0 6.471 0.59 C L
+___SegmentID_1_PathID_2 3
+_____Section 3.431 5.274 1.77 C L
+_____Section 1.488 5.349 -2.67 C R
+_____Section -0.0 6.471 2.4 C L
+___SegmentID_2_PathID_2 4
+_____Section 3.412 7.507 1.61 C R
+_____Section 2.469 6.545 -1.48 C L
+_____Section 1.525 5.583 -1.48 C R
+_____Section -0.0 6.471 2.16 C L
+___SegmentID_3_PathID_2 4
+_____Section 3.535 4.99 2.07 C L
+_____Section 2.177 5.385 -1.57 C R
+_____Section 1.007 4.743 -1.34 F S
+_____Section -0.0 6.471 -3.09 C L
+___SegmentID_4_PathID_2 4
+_____Section 3.509 7.041 1.13 C R
+_____Section 3.036 5.708 -1.57 C L
+_____Section 0.956 4.717 -2.3 F S
+_____Section -0.0 6.471 -3.03 C L
+___SegmentID_5_PathID_2 5
+_____Section 3.412 5.44 1.6 C L
+_____Section 2.382 6.409 -1.57 C R
+_____Section 1.504 6.383 -0.88 F S
+_____Section 0.474 7.352 -1.57 C L
+_____Section -0.0 6.471 1.05 C R
+_PathID 3 from 0.0 6.470588235294118 to -1.0522673529411766 5.820251323529412
+__#Possible_Path_Segment 6
+___SegmentID_0_PathID_3 3
+_____Section -1.494 7.571 2.38 C R
+_____Section -2.257 6.842 -1.11 C L
+_____Section -1.052 5.82 1.82 C R
+___SegmentID_1_PathID_3 3
+_____Section 0.122 4.705 2.17 C L
+_____Section -0.168 4.784 -0.3 C R
+_____Section -1.052 5.82 -1.5 C L
+___SegmentID_2_PathID_3 3
+_____Section 0.64 6.613 -0.67 C L
+_____Section 0.351 6.692 0.3 C R
+_____Section -1.052 5.82 1.94 C L
+___SegmentID_3_PathID_3 3
+_____Section -0.32 6.343 0.35 C R
+_____Section -1.083 5.614 1.11 C L
+_____Section -1.052 5.82 -0.21 C R
+___SegmentID_4_PathID_3 4
+_____Section 0.148 6.582 -0.19 C R
+_____Section 0.529 6.8 -0.44 C L
+_____Section 0.092 6.767 0.44 C R
+_____Section -1.052 5.82 1.67 C L
+___SegmentID_5_PathID_3 4
+_____Section -0.414 5.277 1.37 C L
+_____Section -0.763 5.742 -0.59 C R
+_____Section -1.112 6.206 -0.59 C L
+_____Section -1.052 5.82 0.39 C R
+_PathID 4 from -1.0522673529411766 5.820251323529412 to -1.1764705882352942 2.9411764705882355
+__#Possible_Path_Segment 7
+___SegmentID_0_PathID_4 3
+_____Section -0.853 5.177 0.69 C L
+_____Section -0.376 4.541 0.8 F S
+_____Section -1.176 2.941 2.21 C R
+___SegmentID_1_PathID_4 3
+_____Section -0.297 4.807 1.37 C L
+_____Section -0.859 2.889 -3.06 C R
+_____Section -1.176 2.941 0.32 C L
+___SegmentID_2_PathID_4 3
+_____Section -2.606 5.031 2.12 C R
+_____Section -2.168 4.07 -1.11 C L
+_____Section -1.176 2.941 -1.7 C R
+___SegmentID_3_PathID_4 4
+_____Section -0.337 4.818 1.33 C L
+_____Section -0.615 4.859 -0.28 C R
+_____Section -0.893 4.9 -0.28 C L
+_____Section -1.176 2.941 2.85 C R
+___SegmentID_4_PathID_4 4
+_____Section -2.332 4.904 1.81 C R
+_____Section -1.614 3.902 -1.33 C L
+_____Section -0.896 2.901 -1.33 C R
+_____Section -1.176 2.941 0.28 C L
+___SegmentID_5_PathID_4 4
+_____Section -1.025 5.54 0.28 C L
+_____Section -0.679 4.121 1.46 F S
+_____Section -1.413 2.913 1.57 C R
+_____Section -1.176 2.941 -0.24 C L
+___SegmentID_6_PathID_4 4
+_____Section -0.575 4.924 1.06 C L
+_____Section -1.95 4.593 -1.57 C R
+_____Section -2.029 4.463 -0.15 F S
+_____Section -1.176 2.941 -2.12 C R

@@ -21,6 +21,10 @@ int sign(double x)
   return (x >= 0) ? 1 : -1;
 }
 
+double convertModPython(double dividend, double division) {
+  return dividend - (division * floor(dividend/division));
+}
+
 double M(double theta)
 {
   /*  
@@ -28,7 +32,8 @@ double M(double theta)
      Return the angle phi = theta mod (2 pi) such that -pi <= theta < pi.
     """ 
   */
-  theta = fmod(theta, 2 * M_PI);
+  // theta = fmod(theta, 2 * M_PI);
+  theta = convertModPython(theta, 2*M_PI);
   if (theta < -M_PI)
     return theta + 2 * M_PI;
   if (theta >= M_PI)

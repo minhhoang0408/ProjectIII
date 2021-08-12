@@ -43,13 +43,15 @@ def main():
 
     # draw all routes found
     tesla.speed(0)
-    for i in range(len(PATH) - 1):
-        paths = rs.get_all_paths(PATH[i], PATH[i+1])
+    # for i in range(len(PATH) - 1):
+    #     paths = rs.get_all_paths(PATH[i], PATH[i+1])
 
-        for path in paths:
-            draw.set_random_pencolor(tesla)
-            draw.goto(tesla, PATH[i])
-            draw.draw_path(tesla, path)
+    #     for path in paths:
+    #         draw.set_random_pencolor(tesla)
+    #         draw.goto(tesla, PATH[i])
+    #         draw.draw_path(tesla, path)
+        
+    #     print("PATH END {}: ".format(i+1), PATH[i+1])
 
     # draw shortest route
     tesla.pencolor(1, 0, 0)
@@ -57,11 +59,18 @@ def main():
     tesla.speed(10)
     draw.goto(tesla, PATH[0])
     path_length = 0
-    for i in range(len(PATH) - 1):
+    trajectory = []
+    # for i in range(len(PATH) - 1):
+    #     path = rs.get_optimal_path(PATH[i], PATH[i+1])
+    #     path_length += rs.path_length(path)
+    #     draw.draw_path(tesla, path)
+    for i in range(1):
         path = rs.get_optimal_path(PATH[i], PATH[i+1])
         path_length += rs.path_length(path)
-        draw.draw_path(tesla, path)
-
+        trajectory = draw.draw_path(tesla, path)
+    print("START: ", PATH[0])
+    print (trajectory)
+    print("END: ", PATH[1])
     print("Shortest path length: {} px.".format(int(draw.scale(path_length))))
 
     turtle.done()
