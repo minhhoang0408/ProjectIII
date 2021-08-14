@@ -47,7 +47,6 @@ int main(void)
     f.close();
   }
 
-
   vector<Point3> PATH; // (x, y, theta) is tuple in Python
   PATH.push_back(Point3(pts[0].first, pts[0].second, firstAngle));
 
@@ -60,68 +59,79 @@ int main(void)
   }
   PATH.push_back(Point3(pts[pts.size() - 1].first, pts[pts.size() - 1].second, lastAngle));
 
-
-
-
-  // f.open("../trajectory.txt", ios::out);
-  // if (f.is_open())
-  // {
-  //   string s = "#Paths " + to_string(PATH.size() - 1) + "\n";
-  //   f << s;
-  //   for (int i = 0; i < PATH.size() - 1; i++)
-  //   {
-  //     vector<vector<PathElement>> paths = get_all_paths(PATH[i], PATH[i + 1]);
-  //     s = "_PathID " + to_string(i) + " from " + to_string(PATH[i].x) + " " + to_string(PATH[i].y) + " to " + to_string(PATH[i + 1].x) + " " + to_string(PATH[i + 1].y) + "\n";
-  //     f << s;
-  //     s = "__#Possible_Path_Segment " + to_string(paths.size()) + "\n";
-  //     f << s;
-  //     int j = 0;
-  //     for (vector<PathElement> &path : paths)
-  //     {
-  //       s = "___SegmentID_" + to_string(j) + "_PathID_" + to_string(i);
-
-  //       /*
-  //       draw.set_random_pencolor(tesla)
-  //       draw.goto(tesla, PATH[i])
-  //       #first = PATH[i]
-  //       #s = "____ " + str(PATH[i][0]) + " " + str(PATH[i][1]) + " " + str(PATH[i][2]) + "\n"
-  //       */
-  //     }
-  //   }
-  // }
-
-
-  
-  // cout << "++++++ READ FILE ++++++" << endl;
-  // for (int i = 0; i < pts.size(); i++)
-  // {
-  //   cout << "X: " << pts[i].first << ", Y: " << pts[i].second << endl;
-  // }
-  // cout << "++++++ PATH LIST ++++++" << endl;
-  // for (int i = 0; i < PATH.size(); i++)
-  // {
-  //   cout << "X: " << PATH[i].x << ", Y: " << PATH[i].y << ", THETA: " << PATH[i].theta << endl;
-  // }
-
-  vector<PathElement> full_path;
-  double total_length = 0;
-
-  for (int i = 0; i < PATH.size() - 1; i++)
-  {
-    vector<PathElement> path = get_optimal_path(PATH[i], PATH[i + 1]);
-
-    for (int j = 0; j < path.size(); j++)
+  f.open("./trajectory.txt", ios::out);
+  if (f.is_open())
+  { 
+    vector<TRAJECTORY> localTrajectory;
+    string s = "#Paths " + to_string(PATH.size() - 1) + "\n";
+    f << s;
+    for (int i = 0; i < PATH.size() - 1; i++)
     {
-      full_path.push_back(path[j]);
-    }
+      vector<vector<PathElement>> paths = get_all_paths(PATH[i], PATH[i + 1]);
+      s = "_PathID " + to_string(i) + " from " + to_string(PATH[i].x) + " " + to_string(PATH[i].y) + " to " + to_string(PATH[i + 1].x) + " " + to_string(PATH[i + 1].y) + "\n";
+      f << s;
+      s = "__#Possible_Path_Segment " + to_string(paths.size()) + "\n";
+      f << s;
+      for (int j = 0; j < paths.size(); j++)
+      {
+        s = "___SegmentID_" + to_string(j) + "_PathID_" + to_string(i);
+        
+        // set Pos PATH[i] -> Điểm bắt đầu tìm các path đến PATH[i+1]
+        localTrajectory = draw_path(paths[j]);
+        s = s + " " + to_string(localTrajectory.size()) + "\n";
+        f << s;
 
-    total_length += path_length(path);
+        for (int k = 0; k < localTrajectory.size(); k++) {
+          s = "_____Section " + to_string(localTrajectory[k].x) + " ";
+          s = s + to_string(localTrajectory[k].y) + " ";
+          double param = round(localTrajectory[k].param * 100) / 100;
+          s = s + to_string(param) + " ";
+          string typeOfTraj = localTrajectory[k].typeOfTraj;
+          s = s + typeOfTraj + " ";
+          string steering = localTrajectory[k].typeOfSteering;
+          s = s + steering + "\n";
+          f << s;
+        }
+      }
+    }
+    f.close();
   }
 
-  cout << "Shortest path length: " << total_length << endl;
-
-  for (int i = 0; i < full_path.size(); i++)
+  f.open("../Trace.txt", ios::out);
+  if (f.is_open())
   {
-    cout << full_path[i].repr() << endl;
+
+    vector<PathElement> full_path;
+    double total_length = 0;
+    vector<TRAJECTORY> trajectory;
+    string s = to_string(round(PathElement::RATIO * pts[0].first * 1000) / 1000) + " " + to_string(round(PathElement::RATIO * pts[0].second * 1000) / 1000) + " B\n";;
+    f << s;
+    for (int i = 0; i < PATH.size() - 1; i++)
+    {
+      vector<PathElement> path = get_optimal_path(PATH[i], PATH[i + 1]);
+
+      for (int j = 0; j < path.size(); j++)
+      {
+        full_path.push_back(path[j]);
+      }
+      
+      trajectory = draw_path(path);
+      // todo : Chưa xử lý tọa độ vẫn để tọa độ = 0
+      for (int i = 0; i < trajectory.size() - 1; i++) {
+        s = to_string(PathElement::RATIO * trajectory[i].x) + " " + to_string(PathElement::RATIO * trajectory[i].y)
+            + " " + to_string(trajectory[i].param) + " " + trajectory[i].typeOfTraj + " " + trajectory[i].typeOfSteering + "\n";
+        f << s;
+      }
+
+      total_length += path_length(path);
+    }
+
+    cout << "Shortest path length: " << total_length << endl;
+
+    for (int i = 0; i < full_path.size(); i++)
+    {
+      cout << full_path[i].repr() << endl;
+    }
+    f.close();
   }
 }

@@ -12,15 +12,15 @@ struct TRAJECTORY
 {
   double x;
   double y;
-  double gear;
+  double param;
   string typeOfTraj;
   string typeOfSteering;
 
-  TRAJECTORY(double x, double y, double gear, string typeOfTraj, string typeOfSteering)
+  TRAJECTORY(double x, double y, double param, string typeOfTraj, string typeOfSteering)
   {
     this->x = x;
     this->y = y;
-    this->gear = gear;
+    this->param = param;
     this->typeOfSteering = typeOfSteering;
     this->typeOfTraj = typeOfTraj;
   }
@@ -58,21 +58,21 @@ vector<TRAJECTORY> draw_path(vector<PathElement> path)
 
 
   for (int i = 0; i < path.size(); i++)
-  {
+  { 
     int gear = path[i].gear == Gear::FORWARD ? 1 : -1;
     if (path[i].steering == Steering::LEFT)
     {
-      // get Pos
+      // set Pos
       typeOfSteering = "L";
     }
     else if (path[i].steering == Steering::RIGHT)
     {
-      // get Pos
+      // set Pos
       typeOfSteering = "R";
     }
     else if (path[i].steering == Steering::STRAIGHT)
     {
-      // get Pos
+      // set Pos
       typeOfTraj = "F";
       typeOfSteering = "S";
     }

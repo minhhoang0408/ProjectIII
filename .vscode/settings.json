@@ -2,6 +2,20 @@
   "files.associations": {
     "tuple": "cpp",
     "fstream": "cpp",
-    "ostream": "cpp"
+    "ostream": "cpp",
+    "any": "cpp",
+    "array": "cpp",
+    "charconv": "cpp",
+    "chrono": "cpp",
+    "compare": "cpp",
+    "functional": "cpp",
+    "istream": "cpp",
+    "memory_resource": "cpp",
+    "ranges": "cpp",
+    "ratio": "cpp",
+    "scoped_allocator": "cpp",
+    "type_traits": "cpp",
+    "utility": "cpp",
+    "variant": "cpp"
   }
 }
