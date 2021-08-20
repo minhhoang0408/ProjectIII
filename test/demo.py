@@ -37,6 +37,7 @@ def main():
     tesla.resizemode('user')
     tesla.shapesize(1, 1)
 
+
     # draw vectors representing points in PATH
     for pt in PATH:
         draw.goto(tesla, pt)
@@ -77,7 +78,6 @@ def main():
     for path in full_path: 
         print(path)
     print("Shortest path length: {} px.".format(int(draw.scale(path_length))))
-
     turtle.done()
 
 

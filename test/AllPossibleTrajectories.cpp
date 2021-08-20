@@ -65,6 +65,7 @@ void runAllPossibleTrajectories()
   trajectoriesFile.open("./trajectory.txt", ios::out);
   if (trajectoriesFile.is_open())
   {
+    cout << "+++ Open create trajectory.txt" << endl;
     vector<TRAJECTORY> localTrajectory;
     string s = "#Paths " + to_string(PATH.size() - 1) + "\n";
     trajectoriesFile << s;
@@ -104,7 +105,7 @@ void runAllPossibleTrajectories()
   traceFile.open("./Trace.txt", ios::out);
   if (traceFile.is_open())
   {
-
+    cout << "+++ Open create trajectory.txt" << endl;
     vector<PathElement> full_path;
     double total_length = 0;
     vector<TRAJECTORY> trajectory;

@@ -126,14 +126,9 @@ void Turtle::right(float degree)
 void Turtle::circle(float radius, float degree)
 {
   // Compute new Coordinate
-  // if (degree > 360)
-  // {
-  //   // exception
-  //   return;
-  // }
 
-  float frac = degree / 360.0;
-  int step = 1 + int(min(11 + abs(radius) / 6.0, 59.0));
+  float frac = abs(degree) / 360.0;
+  int step = 1 + int(min(11 + abs(radius) / 6.0, 59.0) * frac);
   float w = 1.0 * degree / step; // góc ở tâm
   float w2 = w / 2;              // góc tiếp tuyến
   float l = 2.0 * radius * getSin(w2); // Khoảng cách 2 điểm
