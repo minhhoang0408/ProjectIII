@@ -74,11 +74,11 @@ void runPythonCode(string file_name, vector<point> &route, int directionAtTheEnd
 
     writeRoute("route.txt", route, 90, lastAngle);
 
-    strcpy(cmd, "test\\AllPossibleTrajectories.py");
+    // strcpy(cmd, "test\\AllPossibleTrajectories.py");
     
-    // runAllPossibleTrajectories();
+    runAllPossibleTrajectories();
 
-    system(cmd);
+    // system(cmd);
 
 }
 #endif

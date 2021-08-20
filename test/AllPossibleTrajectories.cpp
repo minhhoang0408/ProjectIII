@@ -21,7 +21,7 @@ void runAllPossibleTrajectories()
   vector<pair<double, double>> pts;
   cout << "============================== SET UP =========================" << endl;
   fstream f;
-  f.open("./route.txt", ios::in);
+  f.open("route.txt", ios::in);
   if (f.is_open())
   {
     string line;
@@ -59,10 +59,10 @@ void runAllPossibleTrajectories()
   }
   PATH.push_back(Point3(pts[pts.size() - 1].first, pts[pts.size() - 1].second, lastAngle));
 
-  cout << "============================== COMPUTE PATH:  " << PATH.size() << "=========================" << endl;
+  // cout << "============================== COMPUTE PATH:  " << PATH.size() << "=========================" << endl;
 
   fstream trajectoriesFile;
-  trajectoriesFile.open("./trajectory.txt", ios::out);
+  trajectoriesFile.open("trajectory.txt", ios::out);
   if (trajectoriesFile.is_open())
   {
     cout << "+++ Open create trajectory.txt" << endl;
@@ -70,7 +70,8 @@ void runAllPossibleTrajectories()
     string s = "#Paths " + to_string(PATH.size() - 1) + "\n";
     trajectoriesFile << s;
     for (int i = 0; i < PATH.size() - 1; i++)
-    {
+    { 
+      cout << "PATH thứ : " << i << endl;
       vector<vector<PathElement>> paths = get_all_paths(PATH[i], PATH[i + 1]);
       s = "_PathID " + to_string(i) + " from " + to_string(PATH[i].x) + " " + to_string(PATH[i].y) + " to " + to_string(PATH[i + 1].x) + " " + to_string(PATH[i + 1].y) + "\n";
       trajectoriesFile << s;
@@ -100,9 +101,9 @@ void runAllPossibleTrajectories()
     }
     trajectoriesFile.close();
   }
-  cout << "============================== WRITE TRAJECTORIES PATH DONE =========================" << endl;
+  // cout << "============================== WRITE TRAJECTORIES PATH DONE =========================" << endl;
   fstream traceFile;
-  traceFile.open("./Trace.txt", ios::out);
+  traceFile.open("Trace.txt", ios::out);
   if (traceFile.is_open())
   {
     cout << "+++ Open create trajectory.txt" << endl;
