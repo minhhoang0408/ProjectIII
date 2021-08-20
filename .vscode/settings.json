@@ -16,6 +16,8 @@
     "scoped_allocator": "cpp",
     "type_traits": "cpp",
     "utility": "cpp",
-    "variant": "cpp"
+    "variant": "cpp",
+    "iterator": "cpp",
+    "vector": "cpp"
   }
 }

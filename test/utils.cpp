@@ -3,6 +3,8 @@
 
 #include "line_circle_intersects.cpp"
 
+#define M_PI 3.14159265358979323846
+
 
 using namespace std;
 
@@ -87,5 +89,10 @@ vector<string> split (string s, string delimiter) {
 
     res.push_back (s.substr (pos_start));
     return res;
+}
+
+double round5Digits(double value) {
+  // Round up to 5 digits 
+  return round(value * 100000) / 100000;
 }
 

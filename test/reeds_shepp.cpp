@@ -8,21 +8,21 @@
 #include <unistd.h>
 #include <fstream>
 
-#include "utils.cpp"
+#include "turtle.cpp"
 
 using namespace std;
 
 enum Steering
 {
-  LEFT = 1,
-  RIGHT = 2,
-  STRAIGHT = 3
+  _LEFT = 1,
+  _RIGHT = 2,
+  _STRAIGHT = 3
 };
 
 enum Gear
 {
-  FORWARD = 1,
-  BACKWARD = 2
+  _FORWARD = 1,
+  _BACKWARD = 2
 };
 
 class PathElement
@@ -47,17 +47,17 @@ public:
 
     switch (this->steering)
     {
-    case Steering::LEFT:
+    case Steering::_LEFT:
       steering_str = "left";
       break;
-    case Steering::RIGHT:
+    case Steering::_RIGHT:
       steering_str = "right";
       break;
     default:
       steering_str = "straight";
       break;
     }
-    if (this->gear == Gear::FORWARD)
+    if (this->gear == Gear::_FORWARD)
     {
       gear_str = "forward";
     }
@@ -73,11 +73,11 @@ public:
   {
     switch (this->steering)
     {
-    case Steering::LEFT:
-      this->steering = Steering::RIGHT;
+    case Steering::_LEFT:
+      this->steering = Steering::_RIGHT;
       break;
-    case Steering::RIGHT:
-      this->steering = Steering::LEFT;
+    case Steering::_RIGHT:
+      this->steering = Steering::_LEFT;
       break;
     default:
       break;
@@ -85,13 +85,13 @@ public:
   }
   void reverse_gear()
   {
-    if (this->gear == Gear::FORWARD)
+    if (this->gear == Gear::_FORWARD)
     {
-      this->gear = Gear::BACKWARD;
+      this->gear = Gear::_BACKWARD;
     }
     else
     {
-      this->gear = Gear::FORWARD;
+      this->gear = Gear::_FORWARD;
     }
   }
 };
@@ -116,9 +116,9 @@ vector<PathElement> path1(double x, double y, double phi)
 
   if (ut.theta >= 0 && ut.r >= 0 && v >= 0)
   {
-    path.push_back(PathElement(ut.theta, Steering::LEFT, Gear::FORWARD));
-    path.push_back(PathElement(ut.r, Steering::STRAIGHT, Gear::FORWARD));
-    path.push_back(PathElement(v, Steering::LEFT, Gear::FORWARD));
+    path.push_back(PathElement(ut.theta, Steering::_LEFT, Gear::_FORWARD));
+    path.push_back(PathElement(ut.r, Steering::_STRAIGHT, Gear::_FORWARD));
+    path.push_back(PathElement(v, Steering::_LEFT, Gear::_FORWARD));
   }
 
   return path;
@@ -146,9 +146,9 @@ vector<PathElement> path2(double x, double y, double phi)
 
     if (t >= 0 && u >= 0 && v >= 0)
     {
-      path.push_back(PathElement(t, Steering::LEFT, Gear::FORWARD));
-      path.push_back(PathElement(u, Steering::STRAIGHT, Gear::FORWARD));
-      path.push_back(PathElement(v, Steering::RIGHT, Gear::FORWARD));
+      path.push_back(PathElement(t, Steering::_LEFT, Gear::_FORWARD));
+      path.push_back(PathElement(u, Steering::_STRAIGHT, Gear::_FORWARD));
+      path.push_back(PathElement(v, Steering::_RIGHT, Gear::_FORWARD));
     }
   }
 
@@ -180,9 +180,9 @@ vector<PathElement> path3(double x, double y, double phi)
 
     if (t >= 0 && u >= 0 && v >= 0)
     {
-      path.push_back(PathElement(t, Steering::LEFT, Gear::FORWARD));
-      path.push_back(PathElement(u, Steering::RIGHT, Gear::BACKWARD));
-      path.push_back(PathElement(v, Steering::LEFT, Gear::FORWARD));
+      path.push_back(PathElement(t, Steering::_LEFT, Gear::_FORWARD));
+      path.push_back(PathElement(u, Steering::_RIGHT, Gear::_BACKWARD));
+      path.push_back(PathElement(v, Steering::_LEFT, Gear::_FORWARD));
     }
   }
 
@@ -214,9 +214,9 @@ vector<PathElement> path4(double x, double y, double phi)
 
     if (t >= 0 && u >= 0 && v >= 0)
     {
-      path.push_back(PathElement(t, Steering::LEFT, Gear::FORWARD));
-      path.push_back(PathElement(u, Steering::RIGHT, Gear::BACKWARD));
-      path.push_back(PathElement(v, Steering::LEFT, Gear::BACKWARD));
+      path.push_back(PathElement(t, Steering::_LEFT, Gear::_FORWARD));
+      path.push_back(PathElement(u, Steering::_RIGHT, Gear::_BACKWARD));
+      path.push_back(PathElement(v, Steering::_LEFT, Gear::_BACKWARD));
     }
   }
 
@@ -248,9 +248,9 @@ vector<PathElement> path5(double x, double y, double phi)
 
     if (t >= 0 && u >= 0 && v >= 0)
     {
-      path.push_back(PathElement(t, Steering::LEFT, Gear::FORWARD));
-      path.push_back(PathElement(u, Steering::RIGHT, Gear::FORWARD));
-      path.push_back(PathElement(v, Steering::LEFT, Gear::BACKWARD));
+      path.push_back(PathElement(t, Steering::_LEFT, Gear::_FORWARD));
+      path.push_back(PathElement(u, Steering::_RIGHT, Gear::_FORWARD));
+      path.push_back(PathElement(v, Steering::_LEFT, Gear::_BACKWARD));
     }
   }
 
@@ -293,10 +293,10 @@ vector<PathElement> path6(double x, double y, double phi)
 
     if (t >= 0 && u >= 0 && v >= 0)
     {
-      path.push_back(PathElement(t, Steering::LEFT, Gear::FORWARD));
-      path.push_back(PathElement(u, Steering::RIGHT, Gear::FORWARD));
-      path.push_back(PathElement(u, Steering::LEFT, Gear::BACKWARD));
-      path.push_back(PathElement(v, Steering::RIGHT, Gear::BACKWARD));
+      path.push_back(PathElement(t, Steering::_LEFT, Gear::_FORWARD));
+      path.push_back(PathElement(u, Steering::_RIGHT, Gear::_FORWARD));
+      path.push_back(PathElement(u, Steering::_LEFT, Gear::_BACKWARD));
+      path.push_back(PathElement(v, Steering::_RIGHT, Gear::_BACKWARD));
     }
   }
   return path;
@@ -327,10 +327,10 @@ vector<PathElement> path7(double x, double y, double phi)
 
     if (t >= 0 && u >= 0 && v >= 0)
     {
-      path.push_back(PathElement(t, Steering::LEFT, Gear::FORWARD));
-      path.push_back(PathElement(u, Steering::RIGHT, Gear::BACKWARD));
-      path.push_back(PathElement(u, Steering::LEFT, Gear::BACKWARD));
-      path.push_back(PathElement(v, Steering::RIGHT, Gear::FORWARD));
+      path.push_back(PathElement(t, Steering::_LEFT, Gear::_FORWARD));
+      path.push_back(PathElement(u, Steering::_RIGHT, Gear::_BACKWARD));
+      path.push_back(PathElement(u, Steering::_LEFT, Gear::_BACKWARD));
+      path.push_back(PathElement(v, Steering::_RIGHT, Gear::_FORWARD));
     }
   }
 
@@ -362,10 +362,10 @@ vector<PathElement> path8(double x, double y, double phi)
 
     if (t >= 0 && u >= 0 && v >= 0)
     {
-      path.push_back(PathElement(t, Steering::LEFT, Gear::FORWARD));
-      path.push_back(PathElement(M_PI / 2, Steering::RIGHT, Gear::BACKWARD));
-      path.push_back(PathElement(u, Steering::STRAIGHT, Gear::BACKWARD));
-      path.push_back(PathElement(v, Steering::LEFT, Gear::BACKWARD));
+      path.push_back(PathElement(t, Steering::_LEFT, Gear::_FORWARD));
+      path.push_back(PathElement(M_PI / 2, Steering::_RIGHT, Gear::_BACKWARD));
+      path.push_back(PathElement(u, Steering::_STRAIGHT, Gear::_BACKWARD));
+      path.push_back(PathElement(v, Steering::_LEFT, Gear::_BACKWARD));
     }
   }
 
@@ -397,10 +397,10 @@ vector<PathElement> path9(double x, double y, double phi)
 
     if (t >= 0 && u >= 0 && v >= 0)
     {
-      path.push_back(PathElement(t, Steering::LEFT, Gear::FORWARD));
-      path.push_back(PathElement(u, Steering::STRAIGHT, Gear::FORWARD));
-      path.push_back(PathElement(M_PI / 2, Steering::RIGHT, Gear::FORWARD));
-      path.push_back(PathElement(v, Steering::LEFT, Gear::BACKWARD));
+      path.push_back(PathElement(t, Steering::_LEFT, Gear::_FORWARD));
+      path.push_back(PathElement(u, Steering::_STRAIGHT, Gear::_FORWARD));
+      path.push_back(PathElement(M_PI / 2, Steering::_RIGHT, Gear::_FORWARD));
+      path.push_back(PathElement(v, Steering::_LEFT, Gear::_BACKWARD));
     }
   }
 
@@ -430,10 +430,10 @@ vector<PathElement> path10(double x, double y, double phi)
 
     if (t >= 0 && u >= 0 && v >= 0)
     {
-      path.push_back(PathElement(t, Steering::LEFT, Gear::FORWARD));
-      path.push_back(PathElement(M_PI / 2, Steering::RIGHT, Gear::BACKWARD));
-      path.push_back(PathElement(u, Steering::STRAIGHT, Gear::BACKWARD));
-      path.push_back(PathElement(v, Steering::RIGHT, Gear::BACKWARD));
+      path.push_back(PathElement(t, Steering::_LEFT, Gear::_FORWARD));
+      path.push_back(PathElement(M_PI / 2, Steering::_RIGHT, Gear::_BACKWARD));
+      path.push_back(PathElement(u, Steering::_STRAIGHT, Gear::_BACKWARD));
+      path.push_back(PathElement(v, Steering::_RIGHT, Gear::_BACKWARD));
     }
   }
 
@@ -465,10 +465,10 @@ vector<PathElement> path11(double x, double y, double phi)
 
     if (t >= 0 && u >= 0 && v >= 0)
     {
-      path.push_back(PathElement(t, Steering::LEFT, Gear::FORWARD));
-      path.push_back(PathElement(u, Steering::STRAIGHT, Gear::FORWARD));
-      path.push_back(PathElement(M_PI / 2, Steering::LEFT, Gear::FORWARD));
-      path.push_back(PathElement(v, Steering::RIGHT, Gear::BACKWARD));
+      path.push_back(PathElement(t, Steering::_LEFT, Gear::_FORWARD));
+      path.push_back(PathElement(u, Steering::_STRAIGHT, Gear::_FORWARD));
+      path.push_back(PathElement(M_PI / 2, Steering::_LEFT, Gear::_FORWARD));
+      path.push_back(PathElement(v, Steering::_RIGHT, Gear::_BACKWARD));
     }
   }
 
@@ -500,11 +500,11 @@ vector<PathElement> path12(double x, double y, double phi)
 
     if (t >= 0 && u >= 0 && v >= 0)
     {
-      path.push_back(PathElement(t, Steering::LEFT, Gear::FORWARD));
-      path.push_back(PathElement(M_PI / 2, Steering::RIGHT, Gear::BACKWARD));
-      path.push_back(PathElement(u, Steering::STRAIGHT, Gear::BACKWARD));
-      path.push_back(PathElement(M_PI / 2, Steering::LEFT, Gear::BACKWARD));
-      path.push_back(PathElement(v, Steering::RIGHT, Gear::FORWARD));
+      path.push_back(PathElement(t, Steering::_LEFT, Gear::_FORWARD));
+      path.push_back(PathElement(M_PI / 2, Steering::_RIGHT, Gear::_BACKWARD));
+      path.push_back(PathElement(u, Steering::_STRAIGHT, Gear::_BACKWARD));
+      path.push_back(PathElement(M_PI / 2, Steering::_LEFT, Gear::_BACKWARD));
+      path.push_back(PathElement(v, Steering::_RIGHT, Gear::_FORWARD));
     }
   }
 

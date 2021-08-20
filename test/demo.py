@@ -19,6 +19,7 @@ def main():
         theta = math.atan2(dy, dx)
         PATH.append((pts[i][0], pts[i][1], utils.rad2deg(theta)))
     PATH.append((pts[-1][0], pts[-1][1], 0))
+    print(PATH)
 
     # or you can also manually set the angles:
     # PATH = [(-5,5,90),(-5,5,-90),(1,4,180), (5,4,0), (6,-3,90), (4,-4,-40),(-2,0,240), \
@@ -43,15 +44,15 @@ def main():
 
     # draw all routes found
     tesla.speed(0)
-    # for i in range(len(PATH) - 1):
-    #     paths = rs.get_all_paths(PATH[i], PATH[i+1])
+    for i in range(1):
+        paths = rs.get_all_paths(PATH[i], PATH[i+1])
 
-    #     for path in paths:
-    #         draw.set_random_pencolor(tesla)
-    #         draw.goto(tesla, PATH[i])
-    #         draw.draw_path(tesla, path)
+        for path in paths:
+            draw.set_random_pencolor(tesla)
+            draw.goto(tesla, PATH[i])
+            draw.draw_path(tesla, path)
         
-    #     print("PATH END {}: ".format(i+1), PATH[i+1])
+        print("PATH END {}: ".format(i+1), PATH[i+1])
 
     # draw shortest route
     tesla.pencolor(1, 0, 0)
@@ -59,18 +60,22 @@ def main():
     tesla.speed(10)
     draw.goto(tesla, PATH[0])
     path_length = 0
+    full_path = []
     trajectory = []
     # for i in range(len(PATH) - 1):
     #     path = rs.get_optimal_path(PATH[i], PATH[i+1])
     #     path_length += rs.path_length(path)
     #     draw.draw_path(tesla, path)
-    for i in range(1):
-        path = rs.get_optimal_path(PATH[i], PATH[i+1])
-        path_length += rs.path_length(path)
-        trajectory = draw.draw_path(tesla, path)
+    # for i in range(1):
+    #     path = rs.get_optimal_path(PATH[i], PATH[i+1])
+    #     path_length += rs.path_length(path)
+    #     full_path += path
+    #     trajectory = draw.draw_path(tesla, path)
     print("START: ", PATH[0])
     print (trajectory)
     print("END: ", PATH[1])
+    for path in full_path: 
+        print(path)
     print("Shortest path length: {} px.".format(int(draw.scale(path_length))))
 
     turtle.done()

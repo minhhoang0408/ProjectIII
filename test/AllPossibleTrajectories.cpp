@@ -12,9 +12,8 @@
 
 using namespace std;
 
-int main(void)
+void runAllPossibleTrajectories()
 {
-
   float firstAngle = 0;
   float lastAngle = 0;
 
@@ -59,9 +58,9 @@ int main(void)
   }
   PATH.push_back(Point3(pts[pts.size() - 1].first, pts[pts.size() - 1].second, lastAngle));
 
-  f.open("./trajectory.txt", ios::out);
+  f.open("../trajectory.txt", ios::out);
   if (f.is_open())
-  { 
+  {
     vector<TRAJECTORY> localTrajectory;
     string s = "#Paths " + to_string(PATH.size() - 1) + "\n";
     f << s;
@@ -75,13 +74,14 @@ int main(void)
       for (int j = 0; j < paths.size(); j++)
       {
         s = "___SegmentID_" + to_string(j) + "_PathID_" + to_string(i);
-        
+
         // set Pos PATH[i] -> Điểm bắt đầu tìm các path đến PATH[i+1]
-        localTrajectory = draw_path(paths[j]);
+        localTrajectory = draw_path(paths[j], PATH[i]);
         s = s + " " + to_string(localTrajectory.size()) + "\n";
         f << s;
 
-        for (int k = 0; k < localTrajectory.size(); k++) {
+        for (int k = 0; k < localTrajectory.size(); k++)
+        {
           s = "_____Section " + to_string(localTrajectory[k].x) + " ";
           s = s + to_string(localTrajectory[k].y) + " ";
           double param = round(localTrajectory[k].param * 100) / 100;
@@ -104,7 +104,8 @@ int main(void)
     vector<PathElement> full_path;
     double total_length = 0;
     vector<TRAJECTORY> trajectory;
-    string s = to_string(round(PathElement::RATIO * pts[0].first * 1000) / 1000) + " " + to_string(round(PathElement::RATIO * pts[0].second * 1000) / 1000) + " B\n";;
+    string s = to_string(round(PathElement::RATIO * pts[0].first * 1000) / 1000) + " " + to_string(round(PathElement::RATIO * pts[0].second * 1000) / 1000) + " B\n";
+    ;
     f << s;
     for (int i = 0; i < PATH.size() - 1; i++)
     {
@@ -114,12 +115,12 @@ int main(void)
       {
         full_path.push_back(path[j]);
       }
-      
-      trajectory = draw_path(path);
+
+      trajectory = draw_path(path, PATH[i]);
       // todo : Chưa xử lý tọa độ vẫn để tọa độ = 0
-      for (int i = 0; i < trajectory.size() - 1; i++) {
-        s = to_string(PathElement::RATIO * trajectory[i].x) + " " + to_string(PathElement::RATIO * trajectory[i].y)
-            + " " + to_string(trajectory[i].param) + " " + trajectory[i].typeOfTraj + " " + trajectory[i].typeOfSteering + "\n";
+      for (int i = 0; i < trajectory.size(); i++)
+      {
+        s = to_string(PathElement::RATIO * trajectory[i].x) + " " + to_string(PathElement::RATIO * trajectory[i].y) + " " + to_string(trajectory[i].param) + " " + trajectory[i].typeOfTraj + " " + trajectory[i].typeOfSteering + "\n";
         f << s;
       }
 
@@ -135,3 +136,9 @@ int main(void)
     f.close();
   }
 }
+
+
+// int main(void)
+// {
+
+// }

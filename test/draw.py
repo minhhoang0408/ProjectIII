@@ -5,7 +5,9 @@ import random as rd
 
 
 # drawing n units (eg turtle.forward(n)) will draw n * SCALE pixels
-SCALE = 200
+# SCALE = 20 0
+SCALE = 40
+
 
 def scale(x):
     """
