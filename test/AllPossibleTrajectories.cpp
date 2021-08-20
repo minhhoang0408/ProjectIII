@@ -8,21 +8,23 @@
 #include <unistd.h>
 #include <fstream>
 
-#include "draw.cpp"
+#include "drawTurtle.cpp"
 
 using namespace std;
 
 void runAllPossibleTrajectories()
 {
+  cout << "============================== RUN =========================" << endl;
   float firstAngle = 0;
   float lastAngle = 0;
 
   vector<pair<double, double>> pts;
 
   fstream f;
-  f.open("../route.txt", ios::in);
+  f.open("./route.txt", ios::in);
   if (f.is_open())
   {
+    cout << " === open route ===" << endl;
     string line;
     getline(f, line);
     firstAngle = stod(line);
@@ -43,10 +45,11 @@ void runAllPossibleTrajectories()
       i += 1;
       prev = num;
     }
+    cout << " === open route ===" << endl;
     f.close();
   }
 
-  vector<Point3> PATH; // (x, y, theta) is tuple in Python
+  vector<Point3> PATH;
   PATH.push_back(Point3(pts[0].first, pts[0].second, firstAngle));
 
   for (int i = 1; i < pts.size() - 1; i++)
@@ -58,7 +61,9 @@ void runAllPossibleTrajectories()
   }
   PATH.push_back(Point3(pts[pts.size() - 1].first, pts[pts.size() - 1].second, lastAngle));
 
-  f.open("../trajectory.txt", ios::out);
+  cout << "============================== COMPUTE PATH:  " << PATH.size() << "=========================" << endl;
+
+  f.open("./trajectory.txt", ios::out);
   if (f.is_open())
   {
     vector<TRAJECTORY> localTrajectory;
@@ -96,8 +101,8 @@ void runAllPossibleTrajectories()
     }
     f.close();
   }
-
-  f.open("../Trace.txt", ios::out);
+  cout << "============================== WRITE TRAJECTORIES PATH =========================" << endl;
+  f.open("./Trace.txt", ios::out);
   if (f.is_open())
   {
 
@@ -117,7 +122,6 @@ void runAllPossibleTrajectories()
       }
 
       trajectory = draw_path(path, PATH[i]);
-      // todo : Chưa xử lý tọa độ vẫn để tọa độ = 0
       for (int i = 0; i < trajectory.size(); i++)
       {
         s = to_string(PathElement::RATIO * trajectory[i].x) + " " + to_string(PathElement::RATIO * trajectory[i].y) + " " + to_string(trajectory[i].param) + " " + trajectory[i].typeOfTraj + " " + trajectory[i].typeOfSteering + "\n";
@@ -129,16 +133,16 @@ void runAllPossibleTrajectories()
 
     cout << "Shortest path length: " << total_length << endl;
 
-    for (int i = 0; i < full_path.size(); i++)
-    {
-      cout << full_path[i].repr() << endl;
-    }
+    // for (int i = 0; i < full_path.size(); i++)
+    // {
+    //   cout << full_path[i].repr() << endl;
+    // }
     f.close();
   }
+  cout << "============================== END RUN =========================" << endl;
 }
-
 
 // int main(void)
 // {
-
+//   runAllPossibleTrajectories();
 // }

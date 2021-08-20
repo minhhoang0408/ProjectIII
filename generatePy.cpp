@@ -14,9 +14,7 @@
 
 #include "./test/AllPossibleTrajectories.cpp"
 
-
 #include "draw.cpp"
-// #include "test/AllPosibleTrajectories.cpp"
 
 #ifndef _BUILD_PYTHON_CODE_
 #define _BUILD_PYTHON_CODE_
@@ -57,7 +55,7 @@ void writeRoute(string file_name, vector<point> &route, float firstAngle, float 
 
 void runPythonCode(string file_name, vector<point> &route, int directionAtTheEnd){
 
-	char cmd[50];
+	// char cmd[50];
     float lastAngle = 0;
     switch(directionAtTheEnd){
         case 8:
@@ -77,9 +75,10 @@ void runPythonCode(string file_name, vector<point> &route, int directionAtTheEnd
     writeRoute("route.txt", route, 90, lastAngle);
 
     // strcpy(cmd, "test\\AllPossibleTrajectories.py");
+    
     runAllPossibleTrajectories();
 
-    system(cmd);
+    // system(cmd);
 
 }
 #endif
