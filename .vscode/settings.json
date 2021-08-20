@@ -18,6 +18,8 @@
     "utility": "cpp",
     "variant": "cpp",
     "iterator": "cpp",
-    "vector": "cpp"
+    "vector": "cpp",
+    "iosfwd": "cpp",
+    "iostream": "cpp"
   }
 }
